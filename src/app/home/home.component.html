@@ -1,0 +1,42 @@
+
+<div class="container-fluid">
+  <div class="friends">
+    <input type="text" placeholder="Buscar usuario" [(ngModel)]="user" />
+    <ng-container *ngFor="let user of (users | search: user); let i = index">
+      <li [ngSwitch]="user.status">
+        <a routerLink="/conversation/{{ user.uid }}">
+          <strong>{{ i + 1 }}</strong> . {{ user.nick }} - {{ user.age }} -
+          <strong>{{ user.email }}</strong> &nbsp;
+          <i class="far fa-grin-tongue-squint"></i>
+        </a>
+        <div
+          class="status"
+          [ngStyle]="{
+            'background-color': user.status === 'On' ? '#25ef4e' : '#ef2630'
+          }"
+        >
+          <img
+            src="../../assets/img/logo_live_online.png"
+            alt="Online"
+            *ngSwitchCase="'On'"
+          />
+          <img
+            src="../../assets/img/logo_live_offline.png"
+            alt="Offline"
+            *ngSwitchCase="'Off'"
+          />
+          <img
+            src="../../assets/img/logo_live_busy.png"
+            alt="Busy"
+            *ngSwitchCase="'Busy'"
+          />
+          <img
+            src="../../assets/img/logo_live_away.png"
+            alt="Away"
+            *ngSwitchCase="'Away'"
+          />
+        </div>
+      </li>
+    </ng-container>
+  </div>
+</div>
